@@ -18,7 +18,12 @@ public class Main {
         festmenyLista.add(f2);
         UjFestmenyHozzaAdas();
         festmenyLista.addAll(fajlBeolvas("festmenyek.csv"));
-        //System.out.println(festmenyLista);
+        //Random licit
+        for (int i = 0; i < 20; i++) {
+            int rnd = (int) (Math.random());
+            festmenyLista.get(rnd).licit();
+        }
+        System.out.println(festmenyLista);
 
 
     }
