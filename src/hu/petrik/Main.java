@@ -22,7 +22,7 @@ public class Main {
         festmenyLista.addAll(fajlBeolvas("festmenyek.csv"));
         randomLicit();
         UserLicit();
-        
+        festmenyekKiirasaKonzolra();
 
 
     }
@@ -105,5 +105,11 @@ public class Main {
             }
         }
     }
-
+    public static void festmenyekKiirasaKonzolra() {
+        String s = "";
+        for (Festmeny festmeny : festmenyLista) {
+            s += festmeny + "\n";
+        }
+        System.out.println(s);
+    }
 }
