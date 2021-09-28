@@ -23,6 +23,9 @@ public class Main {
         randomLicit();
         UserLicit();
         festmenyekKiirasaKonzolra();
+        //3. feladat
+        legdragabbFestmeny();
+        nemKeltEl();
 
 
     }
@@ -111,5 +114,26 @@ public class Main {
             s += festmeny + "\n";
         }
         System.out.println(s);
+    }
+    //3. feladat
+    public static void legdragabbFestmeny() {
+        Festmeny legdragabb = festmenyLista.get(0);
+        System.out.println("Legdrágább elkelt festmény:");
+        for (var item : festmenyLista
+        ) {
+            if (item.legmagasabbLicit > legdragabb.legmagasabbLicit) {
+                legdragabb = item;
+            }
+        }
+    }
+    public static void nemKeltEl() {
+        int megmaradt = 0;
+        for (var item : festmenyLista
+        ) {
+            if (item.elkelt == false) {
+                megmaradt++;
+            }
+        }
+        System.out.println("Ennyi festmény maradt meg: " + megmaradt);
     }
 }

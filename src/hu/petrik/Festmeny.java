@@ -6,10 +6,10 @@ public class Festmeny {
     private String cim;
     private String festo;
     private String stilus;
-    private int licitekSzama=0;
-    private int legmagasabbLicit=0;
+    public int licitekSzama=0;
+    public int legmagasabbLicit=0;
     private LocalDateTime legutolsoLicitIdeje;
-    private boolean elkelt=false;
+    public boolean elkelt=false;
 
     public Festmeny(String cim, String festo,String stilus){
         this.cim=cim;
