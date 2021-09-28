@@ -5,11 +5,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     static Scanner sc=new Scanner(System.in);
     static List<Festmeny> festmenyLista=new ArrayList<Festmeny>();
+    static Random rnd = new Random();
 
     public static void main(String[] args) {
         Festmeny f1=new Festmeny("Csillagos éj", "Vincent van Gogh", "posztimpresszionizmus");
@@ -18,12 +20,9 @@ public class Main {
         festmenyLista.add(f2);
         UjFestmenyHozzaAdas();
         festmenyLista.addAll(fajlBeolvas("festmenyek.csv"));
-        //Random licit
-        for (int i = 0; i < 20; i++) {
-            int rnd = (int) (Math.random());
-            festmenyLista.get(rnd).licit();
-        }
-        System.out.println(festmenyLista);
+        randomLicit();
+        UserLicit();
+        
 
 
     }
@@ -41,7 +40,6 @@ public class Main {
             festmenyLista.add(new Festmeny(cim, festo, stilus));
         }
     }
-
     public static  List<Festmeny> fajlBeolvas(String fajlNev){
         ArrayList<Festmeny> festmenyLista = new ArrayList<>();
         try {
@@ -61,4 +59,51 @@ public class Main {
         }
         return festmenyLista;
     }
+    public static void randomLicit() {
+        int listaHossza = festmenyLista.size();
+        for (int i = 0; i < 20; i++) {
+            int rndSzam = rnd.nextInt(listaHossza - 0) + 0;
+            festmenyLista.get(rndSzam).licit();
+        }
+    }
+    public static void UserLicit(){
+        System.out.print("Adja meg a festmény sorszámát: ");
+        int sorszam = sc.nextInt();
+        try {
+            while ((sorszam < 0 || sorszam >= festmenyLista.size() - 1) && sorszam != 0) {
+                System.out.print("Hibás sorszám! Adjon meg létező sorszámot: ");
+                sorszam = sc.nextInt();
+            }
+            while (festmenyLista.get(sorszam - 1).getElkelt() && sorszam != 0) {
+                System.out.print("A festmény elkelt! Adjon meg új sorszámot: ");
+                sorszam = sc.nextInt();
+            }
+
+            int mertek;
+            System.out.print("Mekkora mértékkel szeretne licitálni? ");
+            try {
+                mertek = sc.nextInt();
+                if (mertek % 1 == 0) {
+                    festmenyLista.get(sorszam - 1).licit(mertek);
+                } else {
+                    festmenyLista.get(sorszam - 1).licit();
+                }
+            } catch (Exception e2) {
+                System.out.println("Nem számot adott meg!");
+            }
+        } catch (Exception e) {
+            System.out.println("Nem számot adott meg!");
+        }
+
+        if (sorszam == 0) {
+            System.out.println("Licit vége!");
+        }
+
+        for (int i = 0; i < festmenyLista.size(); i++) {
+            if (festmenyLista.get(i).getLicitekSzama() != 0) {
+                festmenyLista.get(i).setElkelt(true);
+            }
+        }
+    }
+
 }

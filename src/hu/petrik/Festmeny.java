@@ -43,6 +43,9 @@ public class Festmeny {
     public boolean getElkelt() {
         return this.elkelt;
     }
+    public void setElkelt(boolean elkelt) {
+        this.elkelt = elkelt;
+    }
     
     public void licit(){
         if (this.elkelt == true) {
